@@ -13,15 +13,11 @@ class Floor
   # TODO: extract to loader/unloader service (PackingService?)
   def load_elevator(elevator)
     while people_waiting? && !elevator.full? do
-      elevator.persons << @persons.pop
+      elevator.load(@persons.pop)
     end
   end
 
   def unload_elevator(elevator)
-    elevator.persons = []
-  end
-
-  def populate
-    @persons << Person.new # TODO: have a populating strategy
+    elevator.unload
   end
 end

@@ -16,7 +16,19 @@ class Building
   end
 
   def populate_floors
-    @floors.each { |floor| floor.populate }
+    @floors.sample(3).each.with_index do |floor, level|
+      target_level = rand(level..@floors.count-1)
+
+      if target_level > level
+        floor.persons << Person.new(target_level)
+        floor.panel.up!
+      end
+
+      if target_level < level
+        floor.persons << Person.new(target_level)
+        floor.panel.down!
+      end
+    end
   end
 
   def to_s
