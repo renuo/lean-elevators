@@ -1,17 +1,17 @@
 class Elevator
-  attr_accessor :floor_number, :persons, :statistics
+  attr_accessor :floor_number, :people, :statistics
   attr_reader :capacity
 
   def initialize(decider)
     @floor_number = 0
     @capacity = 6
-    @persons = []
+    @people = []
     @decider = decider
     @statistics = 0
   end
 
   def full?
-    @persons.count >= @capacity
+    @people.count >= @capacity
   end
 
   def move!(floor_panels)
@@ -19,16 +19,16 @@ class Elevator
   end
 
   def load(person)
-    @persons << person
+    @people << person
   end
 
   def unload
-    pre_count = @persons.count
+    pre_count = @people.count
 
-    @persons.reject! do |person|
+    @people.reject! do |person|
       person.target_floor_number == floor_number
     end
 
-    @statistics += pre_count - persons.count
+    @statistics += pre_count - people.count
   end
 end

@@ -5,12 +5,12 @@ RSpec.describe Floor do
 
   it 'initializes a panel and a person container' do
     expect(subject.panel).not_to be_nil
-    expect(subject.persons).to be_an(Array)
+    expect(subject.people).to be_an(Array)
   end
 
   it 'signalizes waiting people' do
     expect(subject.people_waiting?).to be_falsey
-    subject.persons << double(:person)
+    subject.people << double(:person)
     expect(subject.people_waiting?).to be_truthy
   end
 end

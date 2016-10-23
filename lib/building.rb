@@ -20,12 +20,12 @@ class Building
       target_level = rand(level..@floors.count-1)
 
       if target_level > level
-        floor.persons << Person.new(target_level)
+        floor.people << Person.new(target_level)
         floor.panel.up!
       end
 
       if target_level < level
-        floor.persons << Person.new(target_level)
+        floor.people << Person.new(target_level)
         floor.panel.down!
       end
     end
@@ -35,13 +35,13 @@ class Building
     @floors.map.with_index do |floor, level|
       chamber = @elevators.map do |elevator|
         if level == elevator.floor_number
-          "[#{elevator.persons.count}]"
+          "[#{elevator.people.count}]"
         else
           '   '
         end
       end.join(' | ')
 
-      waiting_people = '웃' * floor.persons.count
+      waiting_people = '웃' * floor.people.count
 
       "  █ #{chamber} █ #{waiting_people}"
     end.join("\n")
