@@ -1,4 +1,4 @@
-Lean Elevators
+# Lean Elevators
 
 Run the following to simulate your elevators:
 
