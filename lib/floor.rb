@@ -1,3 +1,5 @@
+require 'panel'
+
 class Floor
   attr_accessor :panel, :persons
 
