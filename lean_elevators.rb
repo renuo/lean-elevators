@@ -22,7 +22,9 @@ building = Building.new([random_elevator_one, random_elevator_two])
 
   system('clear')
   puts building.to_s
+
   puts
+  puts 'Transport statistics:'
   puts "random: #{random_elevator_one.statistics}"
   puts "fcfs:   #{random_elevator_two.statistics}"
 end

@@ -1,7 +1,7 @@
 class Building
   def initialize(elevators)
     @elevators = elevators
-    @floors = [Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new]
+    @floors = [Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new]
   end
 
   def tick
@@ -44,7 +44,7 @@ class Building
       waiting_people = '웃' * floor.persons.count
 
       "  █ #{chamber} █ #{waiting_people}"
-    end
+    end.join("\n")
   end
 end
 
