@@ -2,12 +2,13 @@ class Building
   def initialize(elevators)
     @elevators = elevators
     @floors = [Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new]
+    @panels = @floors.map(&:panel)
   end
 
   def tick
     # TODO: fairness of choosing elevators
     @elevators.each do |elevator|
-      elevator.move!(@floors.map(&:panel))
+      elevator.move!(@panels)
 
       floor = @floors[elevator.floor_number]
       floor.unload_elevator(elevator)
