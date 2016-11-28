@@ -1,4 +1,6 @@
 class Building
+  attr_accessor :elevators, :floors, :panels
+
   def initialize(elevators)
     @elevators = elevators
     @floors = [Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new]
