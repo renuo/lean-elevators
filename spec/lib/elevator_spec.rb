@@ -29,10 +29,33 @@ RSpec.describe Elevator do
       expect(subject.full?).to be_truthy
     end
 
-    # TODO: is it necessary to assure that this cannot happen?
+    # TODO: should we expect an exception instead?
     it 'returns true if capacity is overreached' do
       subject.people = Array.new(subject.capacity + 1, double(:person))
       expect(subject.full?).to be_truthy
     end
+  end
+
+  describe '#move!' do
+    let(:panels) { [double(:panel), double(:panel), double(:panel)] }
+
+    it 'calls a decider to examine target floor' do
+      expect(decider).to receive(:calculate_level).with(subject, panels)
+      subject.move!(panels)
+    end
+
+    it 'moves elevator to floor number 5' do
+      allow(decider).to receive(:calculate_level).and_return(5)
+      subject.move!(panels)
+      expect(subject.floor_number).to eq(5)
+    end
+  end
+
+  describe '#load' do
+
+  end
+
+  describe '#unload' do
+
   end
 end
