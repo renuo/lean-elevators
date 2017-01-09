@@ -18,6 +18,7 @@ class Building
     end
   end
 
+  # TODO: refactor populating off floors
   def populate_floors
     @floors.sample(3).each.with_index do |floor, level|
       target_level = rand(level..@floors.count - 1)

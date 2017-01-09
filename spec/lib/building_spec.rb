@@ -19,4 +19,14 @@ RSpec.describe Building do
       subject.tick
     end
   end
+
+  describe '#populate_floors' do
+    pending 'adds waiting people to floors'
+    pending 'randomly adds waiting people to floors'
+  end
+
+  describe '#to_s' do
+    pending 'delivers an initial image'
+    pending 'delivers an updated image after tick'
+  end
 end
