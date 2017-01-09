@@ -3,7 +3,7 @@ class Building
 
   def initialize(elevators)
     @elevators = elevators
-    @floors = [Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new, Floor.new]
+    @floors = (1..10).map { Floor.new }
     @panels = @floors.map(&:panel)
   end
 
