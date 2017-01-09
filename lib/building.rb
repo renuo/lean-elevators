@@ -20,7 +20,7 @@ class Building
 
   def populate_floors
     @floors.sample(3).each.with_index do |floor, level|
-      target_level = rand(level..@floors.count-1)
+      target_level = rand(level..@floors.count - 1)
 
       if target_level > level
         floor.people << Person.new(target_level)
@@ -50,6 +50,3 @@ class Building
     end.join("\n")
   end
 end
-
-
-

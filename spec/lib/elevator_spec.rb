@@ -15,7 +15,7 @@ RSpec.describe Elevator do
 
   describe '#full?' do
     it 'returns false if elevator is empty' do
-      subject.people = Array.new
+      subject.people = []
       expect(subject.full?).to be_falsey
     end
 

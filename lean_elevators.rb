@@ -5,4 +5,3 @@ require 'elevator'
 require 'floor'
 require 'panel'
 require 'person'
-

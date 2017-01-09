@@ -14,9 +14,7 @@ class Floor
 
   # TODO: extract to loader/unloader service (PackingService?)
   def load_elevator(elevator)
-    while people_waiting? && !elevator.full? do
-      elevator.load(@people.pop)
-    end
+    elevator.load(@people.pop) while people_waiting? && !elevator.full?
   end
 
   def unload_elevator(elevator)

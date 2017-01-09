@@ -6,7 +6,7 @@ module Deciders
       end
 
       def first_unload(elevator)
-        elevator.people.first.target_floor_number if elevator.people.first
+        elevator.people.first&.target_floor_number
       end
 
       def first_load(floor_panels)
