@@ -61,6 +61,23 @@ RSpec.describe Elevator do
   end
 
   describe '#unload' do
+    let(:debarking_person) { double(:person, target_floor_number: 42) }
+    let(:patient_person) { double(:person, target_floor_number: 1337) }
 
+    before(:each) do
+      subject.floor_number = 42
+      subject.people = [patient_person, debarking_person, patient_person, debarking_person, patient_person]
+    end
+
+    it 'removes two persons who want to exit from elevator' do
+      subject.unload
+      expect(subject.people).to contain_exactly(patient_person, patient_person, patient_person)
+    end
+
+    context '(statistics)' do
+      it 'counts unloaded people as being transported' do
+        expect { subject.unload }.to change { subject.statistics }.from(0).to(2)
+      end
+    end
   end
 end
