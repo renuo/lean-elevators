@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require_relative '../lean_elevators'
 
 RSpec.configure do |config|
