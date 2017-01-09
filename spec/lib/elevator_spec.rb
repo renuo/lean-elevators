@@ -52,7 +52,12 @@ RSpec.describe Elevator do
   end
 
   describe '#load' do
-
+    it 'adds persons to the elevator' do
+      person = double(:person)
+      expect(subject.people).not_to include(person)
+      subject.load(person)
+      expect(subject.people).to include(person)
+    end
   end
 
   describe '#unload' do
