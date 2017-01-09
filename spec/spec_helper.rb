@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start
+SimpleCov.minimum_coverage 100
 
 require_relative '../lean_elevators'
 
