@@ -9,7 +9,7 @@ class Floor
   end
 
   def people_waiting?
-    @people.count > 0
+    @people.count.positive?
   end
 
   # TODO: extract to loader/unloader service (PackingService?)
