@@ -40,7 +40,7 @@ RSpec.describe Elevator do
     let(:panels) { [double(:panel), double(:panel), double(:panel)] }
 
     it 'calls a decider to examine target floor' do
-      expect(decider).to receive(:calculate_level).with(subject, panels)
+      expect(decider).to receive(:calculate_level).with(subject.send(:dto), panels)
       subject.move!(panels)
     end
 
