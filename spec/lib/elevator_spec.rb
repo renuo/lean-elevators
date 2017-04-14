@@ -1,4 +1,5 @@
 require 'elevator'
+require 'decider_dto'
 
 RSpec.describe Elevator do
   let(:decider) { double(:empty_decider) }
@@ -38,14 +39,19 @@ RSpec.describe Elevator do
 
   describe '#move!' do
     let(:panels) { [double(:panel), double(:panel), double(:panel)] }
+    let(:decider_dto) { double(:decider_dto) }
+
+    before(:each) do
+      allow(subject).to receive(:decider_dto).and_return(decider_dto)
+    end
 
     it 'calls a decider to examine target floor' do
-      expect(decider).to receive(:calculate_level).with(subject.send(:dto), panels)
+      expect(decider).to receive(:calculate_level).with(decider_dto)
       subject.move!(panels)
     end
 
     it 'moves elevator to floor number 5' do
-      allow(decider).to receive(:calculate_level).and_return(5)
+      allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
       subject.move!(panels)
       expect(subject.floor_number).to eq(5)
     end

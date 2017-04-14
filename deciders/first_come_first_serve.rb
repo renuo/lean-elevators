@@ -1,19 +1,17 @@
 module Deciders
   class FirstComeFirstServe
-    class << self
-      def calculate_level(elevator, floor_panels)
-        first_serve(elevator) || first_come(floor_panels) || 0
-      end
+    def calculate_level(decider_dto)
+      first_serve(decider_dto.elevator) || first_come(decider_dto.floors) || 0
+    end
 
-      def first_serve(elevator)
-        elevator.people.first&.target_floor_number
-      end
+    def first_serve(elevator)
+      elevator.target_floors.first
+    end
 
-      def first_come(floor_panels)
-        floor_panels.each_index.select do |level|
-          floor_panels[level].up? || floor_panels[level].down?
-        end.first
-      end
+    def first_come(floors)
+      floors.map(&:panel).each_index.select do |level|
+        floors[level].up? || floors[level].down?
+      end.first
     end
   end
 end

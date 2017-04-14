@@ -5,8 +5,8 @@ require_relative '../lean_elevators'
 require_relative '../deciders/random'
 require_relative '../deciders/first_come_first_serve'
 
-random_elevator_one = Elevator.new(Deciders::Random)
-random_elevator_two = Elevator.new(Deciders::FirstComeFirstServe)
+random_elevator_one = Elevator.new(Deciders::Random.new)
+random_elevator_two = Elevator.new(Deciders::FirstComeFirstServe.new)
 
 building = Building.new([random_elevator_one, random_elevator_two])
 

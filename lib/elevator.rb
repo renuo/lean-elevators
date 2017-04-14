@@ -1,3 +1,5 @@
+require 'decider_dto'
+
 class Elevator
   attr_accessor :floor_number, :people
   attr_reader :capacity, :statistics
@@ -15,7 +17,8 @@ class Elevator
   end
 
   def move!(floor_panels)
-    @floor_number = @decider.calculate_level(dto, floor_panels)
+    # TODO: extract this to the outside of the elevator
+    @floor_number = @decider.calculate_level(decider_dto(floor_panels))
   end
 
   def load(person)
@@ -34,12 +37,7 @@ class Elevator
 
   private
 
-  def dto
-    OpenStruct.new({
-        capacity: @capacity,
-        current_location: @floor_number,
-        target_locations: @people.map(&:target_floor_number),
-        statistics: @statistics
-    })
+  def decider_dto(floor_panels)
+    DeciderDto.new(self, floor_panels)
   end
 end
