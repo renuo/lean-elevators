@@ -20,4 +20,4 @@ This will get you an animation looking like that:
 
 Run the *rspec* tests:
 
-    rspec
+    bin/check
