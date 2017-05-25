@@ -11,7 +11,8 @@ random_elevator_two = Elevator.new(Deciders::FirstComeFirstServe.new)
 building = Building.new([random_elevator_one, random_elevator_two])
 
 100_000.times do
-  building.populate_floors
+  populator = BuildingPopulator.new(building)
+  populator.populate
   building.tick
 
   sleep(1)

@@ -1,11 +1,11 @@
 require 'building'
 
 RSpec.describe Building do
-  let(:elevator) { instance_double('Elevator', floor_number: 0, full?: false) }
+  let(:elevator) { instance_double('Elevator', floor_number: 0, full?: false, people: []) }
   subject { described_class.new([elevator]) }
 
   describe '#new' do
-    it 'initializes building' do
+    it 'initializes' do
       expect(subject).not_to be_nil
     end
   end
@@ -20,13 +20,20 @@ RSpec.describe Building do
     end
   end
 
-  describe '#populate_floors' do
-    pending 'adds waiting people to floors'
-    pending 'randomly adds waiting people to floors'
-  end
-
   describe '#to_s' do
-    pending 'delivers an initial image'
-    pending 'delivers an updated image after tick'
+    it 'delivers an initial image' do
+      expect(subject.to_s).not_to include('웃')
+      expect(subject.to_s.split("\n")[0]).to include('[0]')
+    end
+
+    it 'repositions elevator' do
+      allow(elevator).to receive(:floor_number).and_return(1)
+      expect(subject.to_s.split("\n")[1]).to include('[0]')
+    end
+
+    it 'draws waiting people' do
+      subject.floors[0].people << instance_double('Person')
+      expect(subject.to_s.split("\n")[0]).to include('웃')
+    end
   end
 end

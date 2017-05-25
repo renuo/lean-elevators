@@ -18,23 +18,6 @@ class Building
     end
   end
 
-  # TODO: refactor populating off floors
-  def populate_floors
-    @floors.sample(3).each.with_index do |floor, level|
-      target_level = rand(level..@floors.count - 1)
-
-      if target_level > level
-        floor.people << Person.new(target_level)
-        floor.panel.up!
-      end
-
-      if target_level < level
-        floor.people << Person.new(target_level)
-        floor.panel.down!
-      end
-    end
-  end
-
   def to_s
     @floors.map.with_index do |floor, level|
       chamber = @elevators.map do |elevator|

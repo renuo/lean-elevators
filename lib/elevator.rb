@@ -37,7 +37,9 @@ class Elevator
 
   private
 
+  # :nocov:
   def decider_dto(floor_panels)
     DeciderDto.new(self, floor_panels)
   end
+  # :nocov:
 end
