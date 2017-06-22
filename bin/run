@@ -2,6 +2,7 @@
 
 require_relative '../lean_elevators'
 
+require_relative '../deciders/net'
 require_relative '../deciders/random'
 require_relative '../deciders/first_come_first_serve'
 
@@ -11,7 +12,7 @@ random_elevator_two = Elevator.new(Deciders::FirstComeFirstServe.new)
 building = Building.new([random_elevator_one, random_elevator_two])
 
 100_000.times do
-  populator = BuildingPopulator.new(building)
+  populator = Populator.new(building.floors)
   populator.populate
   building.tick
 

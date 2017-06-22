@@ -1,22 +1,23 @@
 require 'net/http'
+require 'json'
 
 module Deciders
   class Net
     def initialize
-      @uri = URI.parse('https://127.0.0.1:3001/decider')
+      @uri = URI.parse('https://127.0.0.1:9292/decide')
       @http = ::Net::HTTP.new(@uri.host, @uri.port).start # Start here to reuse connection
     end
 
     def calculate_level(decider_dto)
       response = @http.request(build_json_post(decider_dto))
-      response.body.to_i
+      JSON.parse(response.body)
     end
 
     private
 
     def build_json_post(decider_dto)
       request = ::Net::HTTP::Post.new(@uri, 'Content-Type' => 'application/json')
-      request.body = decider_dto.to_json
+      request.body = decider_dto.to_hash.to_json
       request
     end
   end

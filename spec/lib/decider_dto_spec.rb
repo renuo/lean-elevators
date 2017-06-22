@@ -12,10 +12,10 @@ RSpec.describe DeciderDto do
       subject { instance.elevator }
 
       it 'builds transfer object' do
-        expect(subject.capacity).to be_a(Numeric)
-        expect(subject.current_floor).to be_a(Numeric)
-        expect(subject.target_floors).to be_an(Enumerable)
-        expect(subject.statistics).to be_a(Numeric)
+        expect(subject[:capacity]).to be_a(Numeric)
+        expect(subject[:current_floor]).to be_a(Numeric)
+        expect(subject[:target_floors]).to be_an(Enumerable)
+        expect(subject[:statistics]).to be_a(Numeric)
       end
     end
 
@@ -24,8 +24,8 @@ RSpec.describe DeciderDto do
 
       it 'builds transfer object for floors' do
         expect(subject).to be_an(Enumerable)
-        expect(subject.first.panel.up).to be(false)
-        expect(subject.first.panel.down).to be(false)
+        expect(subject.first[:panel][:up]).to be(false)
+        expect(subject.first[:panel][:down]).to be(false)
       end
     end
   end

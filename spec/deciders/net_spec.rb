@@ -5,8 +5,8 @@ RSpec.describe Deciders::Net do
   describe '#initialize' do
     it 'opens a TCP connection' do
       server = TCPServer.new(3001)
-
       client = nil
+
       Thread.start { client = server.accept }.join(0.01)
       Thread.start { Deciders::Net.new }.join(0.01)
 
@@ -17,7 +17,7 @@ RSpec.describe Deciders::Net do
 
   describe '#calculate_level' do
     let(:instance) { described_class.new }
-    let(:subject) { instance.calculate_level(double(to_json: '{}')) }
+    let(:subject) { instance.calculate_level(instance_double(DeciderDto, to_hash: {})) }
     let(:response) { double(body: '5') }
     let(:http_connection) { double(request: response) }
 

@@ -2,7 +2,7 @@ require 'elevator'
 require 'decider_dto'
 
 RSpec.describe Elevator do
-  let(:decider) { double(:empty_decider) }
+  let(:decider) { double(:empty_decider, calculate_level: 1) }
   subject { described_class.new(decider) }
 
   describe '#new' do
@@ -51,9 +51,14 @@ RSpec.describe Elevator do
     end
 
     it 'moves elevator to floor number 5' do
-      allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
+      allow(decider).to receive(:calculate_level).with(decider_dto).and_return(2)
       subject.move!(panels)
-      expect(subject.floor_number).to eq(5)
+      expect(subject.floor_number).to eq(2)
+    end
+
+    it 'doesnt move if floor number isnt present' do
+      allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
+      expect { subject.move!(panels) }.to raise_error('Decider choose invalid level')
     end
   end
 

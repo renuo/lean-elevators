@@ -1,8 +1,8 @@
 require 'populator'
 
 RSpec.describe Populator do
-  let(:origin_floor) { double(people: [], press_up!: nil, press_down!: nil) }
-  let(:target_floor) { double(people: [], press_up!: nil, press_down!: nil) }
+  let(:origin_floor) { instance_double(Floor, people: [], panel: Panel.new) }
+  let(:target_floor) { instance_double(Floor, people: [], panel: Panel.new) }
   let(:floors) { [origin_floor, target_floor] }
   subject { described_class.new(floors) }
 
@@ -19,11 +19,6 @@ RSpec.describe Populator do
 
     it 'adds waiting people to floors' do
       expect { subject.populate }.to change { origin_floor.people.count }.by(3)
-    end
-
-    it 'lets people go up' do
-      expect(origin_floor).to receive(:press_up!).exactly(3).times
-      subject.populate
     end
   end
 end

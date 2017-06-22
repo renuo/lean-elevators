@@ -1,4 +1,4 @@
-require 'decider_dto'
+require_relative 'decider_dto'
 
 class Elevator
   attr_accessor :floor_number, :people
@@ -18,7 +18,9 @@ class Elevator
 
   def move!(floor_panels)
     # TODO: extract this to the outside of the elevator
-    @floor_number = @decider.calculate_level(decider_dto(floor_panels))
+    floor_candidate = @decider.calculate_level(decider_dto(floor_panels))
+    raise 'Decider choose invalid level' unless floor_panels[floor_candidate]
+    @floor_number = floor_candidate
   end
 
   def load(person)

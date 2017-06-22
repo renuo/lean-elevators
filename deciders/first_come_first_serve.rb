@@ -5,12 +5,12 @@ module Deciders
     end
 
     def first_serve(elevator)
-      elevator.target_floors.first
+      elevator[:target_floors].first
     end
 
     def first_come(floors)
-      floors.map(&:panel).each_index.select do |level|
-        floors[level].up? || floors[level].down?
+      floors.map { |f| f[:panel] }.each_index.select do |level|
+        floors[level][:up] || floors[level][:down]
       end.first
     end
   end

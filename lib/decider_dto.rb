@@ -8,25 +8,32 @@ class DeciderDto
     @floors = build_floor_structs(panels)
   end
 
+  def to_hash
+    {
+        elevator: @elevator,
+        floors: @floors
+    }
+  end
+
   private
 
   def build_elevator_struct(elevator)
-    OpenStruct.new(
+    {
       capacity: elevator.capacity,
       current_floor: elevator.floor_number,
       target_floors: elevator.people.map(&:target_floor_number),
       statistics: elevator.statistics
-    )
+    }
   end
 
   def build_floor_structs(panels)
     panels.map do |panel|
-      OpenStruct.new(
-        panel: OpenStruct.new(
+      {
+        panel: {
           up: panel.up?,
           down: panel.down?
-        )
-      )
+        }
+      }
     end
   end
 end
