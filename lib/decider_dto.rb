@@ -10,8 +10,8 @@ class DeciderDto
 
   def to_hash
     {
-        elevator: @elevator,
-        floors: @floors
+      elevator: @elevator,
+      floors: @floors
     }
   end
 

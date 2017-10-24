@@ -19,7 +19,7 @@ RSpec.describe DeciderDto do
       end
     end
 
-    context 'for elevator' do
+    context 'for floors' do
       subject { instance.floors }
 
       it 'builds transfer object for floors' do
@@ -27,6 +27,12 @@ RSpec.describe DeciderDto do
         expect(subject.first[:panel][:up]).to be(false)
         expect(subject.first[:panel][:down]).to be(false)
       end
+    end
+
+    context 'when serializing to hash' do
+      subject { instance.to_hash }
+
+      it { is_expected.to be_a(Hash) }
     end
   end
 end

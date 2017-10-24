@@ -4,7 +4,7 @@ require 'deciders/net'
 RSpec.describe Deciders::Net do
   describe '#initialize' do
     it 'opens a TCP connection' do
-      server = TCPServer.new(3001)
+      server = TCPServer.new(9292)
       client = nil
 
       Thread.start { client = server.accept }.join(0.01)
