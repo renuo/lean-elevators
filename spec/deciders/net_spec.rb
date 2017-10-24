@@ -4,11 +4,11 @@ require 'deciders/net'
 RSpec.describe Deciders::Net do
   describe '#initialize' do
     it 'opens a TCP connection' do
-      server = TCPServer.new(9292)
+      server = TCPServer.new(1337)
       client = nil
 
       Thread.start { client = server.accept }.join(0.01)
-      Thread.start { Deciders::Net.new }.join(0.01)
+      Thread.start { Deciders::Net.new('http://127.0.0.1:1337') }.join(0.01)
 
       sleep(0.001)
       expect(client).to be_an_instance_of(TCPSocket)
@@ -16,7 +16,7 @@ RSpec.describe Deciders::Net do
   end
 
   describe '#calculate_level' do
-    let(:instance) { described_class.new }
+    let(:instance) { described_class.new('https://example.com') }
     let(:subject) { instance.calculate_level(instance_double(DeciderDto, to_hash: {})) }
     let(:response) { double(body: '5') }
     let(:http_connection) { double(request: response) }

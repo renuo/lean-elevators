@@ -3,8 +3,8 @@ require 'json'
 
 module Deciders
   class Net
-    def initialize
-      @uri = URI.parse('https://127.0.0.1:9292/decide')
+    def initialize(uri)
+      @uri = URI.parse(uri)
       @http = ::Net::HTTP.new(@uri.host, @uri.port).start # Start here to reuse connection
     end
 
