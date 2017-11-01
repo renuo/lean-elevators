@@ -2,8 +2,6 @@
 
 require_relative '../lib/lean_elevators'
 
-require_relative '../lib/lean_elevators/deciders/net'
-
 elevator_endpoints = [
     'http://127.0.0.1:10001/decide',
     'http://127.0.0.1:10002/decide'
