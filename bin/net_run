@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/lean_elevators'
+
+require_relative '../lib/lean_elevators/deciders/net'
+
+elevator_endpoints = [
+    'http://127.0.0.1:10001/decide',
+    'http://127.0.0.1:10002/decide'
+]
+
+LeanElevators.configure do |config|
+  config.net_deciders = elevator_endpoints
+  config.ticks = 10_000
+end
+
+LeanElevators.run do |building|
+  system('clear')
+  puts building.to_s
+
+  puts
+  puts 'Transport statistics:'
+  building.elevators.each_with_index do |elevator, index|
+    puts "#{index}: #{elevator.statistics}"
+  end
+end
+
