@@ -6,11 +6,13 @@ module LeanElevators
     class Net
       def initialize(uri)
         @uri = URI.parse(uri)
-        @http = ::Net::HTTP.new(@uri.host, @uri.port).start # Start here to reuse connection
+        @connection = ::Net::HTTP.new(@uri.host, @uri.port).tap do |http|
+          http.use_ssl = @uri.scheme == 'https'
+        end.start # Start here to reuse connection
       end
 
       def calculate_level(decider_dto)
-        response = @http.request(build_json_post(decider_dto))
+        response = @connection.request(build_json_post(decider_dto))
         JSON.parse(response.body).to_i
       end
 
