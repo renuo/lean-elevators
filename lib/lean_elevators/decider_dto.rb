@@ -11,8 +11,8 @@ module LeanElevators
 
     def to_hash
       {
-          elevator: @elevator,
-          floors: @floors
+        elevator: @elevator,
+        floors: @floors
       }
     end
 
@@ -20,20 +20,20 @@ module LeanElevators
 
     def build_elevator_struct(elevator)
       {
-          capacity: elevator.capacity,
-          current_floor: elevator.floor_number,
-          target_floors: elevator.people.map(&:target_floor_number),
-          statistics: elevator.statistics
+        capacity: elevator.capacity,
+        current_floor: elevator.floor_number,
+        target_floors: elevator.people.map(&:target_floor_number),
+        statistics: elevator.statistics
       }
     end
 
     def build_floor_structs(panels)
       panels.map do |panel|
         {
-            panel: {
-                up: panel.up?,
-                down: panel.down?
-            }
+          panel: {
+            up: panel.up?,
+            down: panel.down?
+          }
         }
       end
     end

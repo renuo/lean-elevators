@@ -3,8 +3,8 @@
 require_relative '../lib/lean_elevators'
 
 elevator_endpoints = [
-    'http://127.0.0.1:10001/decide',
-    'http://127.0.0.1:10002/decide'
+  'http://127.0.0.1:10001/decide',
+  'http://127.0.0.1:10002/decide'
 ]
 
 LeanElevators.configure do |config|
@@ -22,4 +22,3 @@ LeanElevators.run do |building|
     puts "#{index}: #{elevator.statistics}"
   end
 end
-

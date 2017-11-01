@@ -6,5 +6,4 @@ module LeanElevators
       expect(subject.target_floor_number).to be(3)
     end
   end
-
 end

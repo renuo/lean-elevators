@@ -54,4 +54,3 @@ module LeanElevators
     end
   end
 end
-
