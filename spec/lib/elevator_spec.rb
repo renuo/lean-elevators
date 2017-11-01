@@ -56,7 +56,7 @@ module LeanElevators
 
       it 'doesnt move if floor number isnt present' do
         allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
-        expect { subject.move!(panels) }.to raise_error('Decider choose invalid level')
+        expect { subject.move!(panels) }.to change { subject.errors.count }.by(1)
       end
     end
 
