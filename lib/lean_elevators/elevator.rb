@@ -16,10 +16,18 @@ module LeanElevators
     end
 
     def move!(floor_panels)
-      # TODO: extract this to the outside of the elevator
-      floor_candidate = @decider.calculate_level(decider_dto(floor_panels))
-      raise 'Decider choose invalid level' unless floor_panels[floor_candidate]
+      # TODO: this probably doesn't belong into the elevator
+      floor_candidate = Timeout.timeout(LeanElevators.configuration.decider_timeout) do
+        @decider.calculate_level(decider_dto(floor_panels))
+      end
+
+      if floor_panels[floor_candidate].nil?
+        puts 'Decider choose invalid level'
+      end
+
       @floor_number = floor_candidate
+    rescue Timeout::Error => e
+      puts "Timeout of has been exceeded: #{e.message}"
     end
 
     def load(person)

@@ -11,7 +11,7 @@ module LeanElevators
 
       def calculate_level(decider_dto)
         response = @http.request(build_json_post(decider_dto))
-        JSON.parse(response.body)
+        JSON.parse(response.body).to_i
       end
 
       private

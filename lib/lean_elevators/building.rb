@@ -8,6 +8,7 @@ module LeanElevators
       @panels = @floors.map(&:panel)
     end
 
+    # TODO: this method doesn't feel right being situated in the Building class
     def tick
       # TODO: fairness of choosing elevators
       @elevators.each do |elevator|
