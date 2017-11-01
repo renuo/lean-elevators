@@ -2,9 +2,9 @@ module LeanElevators
   class Building
     attr_accessor :elevators, :floors, :panels
 
-    def initialize(elevators)
+    def initialize(building_size, elevators)
       @elevators = elevators
-      @floors = (1..10).map { Floor.new }
+      @floors = (1..building_size).map { Floor.new }
       @panels = @floors.map(&:panel)
     end
 

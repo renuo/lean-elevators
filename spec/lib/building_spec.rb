@@ -1,7 +1,8 @@
 module LeanElevators
   RSpec.describe Building do
+    let(:building_size) { 10 }
     let(:elevator) { instance_double('Elevator', floor_number: 0, full?: false, people: []) }
-    subject { described_class.new([elevator]) }
+    subject { described_class.new(building_size, [elevator]) }
 
     describe '#new' do
       it 'initializes' do

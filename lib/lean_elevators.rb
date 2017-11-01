@@ -19,26 +19,28 @@ module LeanElevators
   end
 
   class Configuration
-    attr_accessor :deciders, :net_deciders, :ticks, :decider_timeout, :round_delay
+    attr_accessor :building_size, :deciders, :net_deciders, :tick_limit, :decider_timeout, :round_delay
 
     def initialize
+      @building_size = 10
       @deciders = []
       @net_deciders = []
-      @ticks = 100
+      @tick_limit = 100
       @decider_timeout = 0.1
       @round_delay = 0.1
     end
   end
 
   def self.run
+    # TODO: I'm not happy yet with this differentiation. What would be a good solution which keeps configuration easy?
     elevators = configuration.deciders.map { |decider| Elevator.new(decider) }
     elevators += configuration.net_deciders.map { |uri| Elevator.new(Deciders::Net.new(uri)) }
 
     raise 'no elevators have been configured' if elevators.empty?
 
-    building = Building.new(elevators)
+    building = Building.new(configuration.building_size, elevators)
 
-    configuration.ticks.times do
+    configuration.tick_limit.times do
       populator = Populator.new(building.floors)
       populator.populate
       building.tick

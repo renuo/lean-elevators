@@ -9,7 +9,7 @@ elevator_endpoints = [
 
 LeanElevators.configure do |config|
   config.net_deciders = elevator_endpoints
-  config.ticks = 10_000
+  config.tick_limit = 10_000
 end
 
 LeanElevators.run do |building|
