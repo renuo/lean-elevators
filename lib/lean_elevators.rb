@@ -43,12 +43,12 @@ module LeanElevators
 
     building = Building.new(configuration.building_size, elevators)
 
-    configuration.tick_limit.times do
+    configuration.tick_limit.times do |tick|
       populator = Populator.new(building.floors)
       populator.populate
       building.tick
 
-      yield(building)
+      yield(building, tick)
 
       sleep(configuration.round_delay)
     end
