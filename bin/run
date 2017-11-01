@@ -1,28 +1,24 @@
 #!/usr/bin/env ruby
 
-require_relative '../lean_elevators'
+require_relative '../lib/lean_elevators'
+require_relative '../lib/lean_elevators/deciders/random'
+require_relative '../lib/lean_elevators/deciders/first_come_first_serve'
 
-require_relative '../deciders/net'
-require_relative '../deciders/random'
-require_relative '../deciders/first_come_first_serve'
+random_decider = LeanElevators::Deciders::Random.new
+fcfs_decider = LeanElevators::Deciders::FirstComeFirstServe.new
 
-random_elevator_one = Elevator.new(Deciders::Random.new)
-random_elevator_two = Elevator.new(Deciders::FirstComeFirstServe.new)
+LeanElevators.configure do |config|
+  config.deciders = [random_decider, fcfs_decider]
+  config.ticks = 10_000
+end
 
-building = Building.new([random_elevator_one, random_elevator_two])
-
-100_000.times do
-  populator = Populator.new(building.floors)
-  populator.populate
-  building.tick
-
-  sleep(1)
-
+LeanElevators.run do |building|
   system('clear')
   puts building.to_s
 
   puts
   puts 'Transport statistics:'
-  puts "random: #{random_elevator_one.statistics}"
-  puts "fcfs:   #{random_elevator_two.statistics}"
+  building.elevators.each do |elevator|
+    puts "#{elevator} #{elevator.statistics}"
+  end
 end

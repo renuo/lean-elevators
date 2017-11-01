@@ -2,7 +2,7 @@ require 'simplecov'
 SimpleCov.start
 SimpleCov.minimum_coverage 100
 
-require_relative '../lean_elevators'
+require_relative '../lib/lean_elevators'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
