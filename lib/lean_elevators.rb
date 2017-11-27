@@ -43,7 +43,10 @@ module LeanElevators
     raise 'no elevators have been configured' if elevators.empty?
 
     building = Building.new(configuration.building_size, elevators)
-    populator = Populator.new(building.floors)
+
+    initial_spawn_rate = building.elevators.count
+    spawn_limit = (building.elevators.count * 6) / 2
+    populator = Populator.new(building.floors, initial_spawn_rate: initial_spawn_rate, spawn_limit: spawn_limit)
 
     configuration.tick_limit.times do |tick|
       populator.populate

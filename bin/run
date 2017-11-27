@@ -4,11 +4,14 @@ require_relative '../lib/lean_elevators'
 require_relative '../lib/lean_elevators/deciders/random'
 require_relative '../lib/lean_elevators/deciders/first_come_first_serve'
 
-random_decider = LeanElevators::Deciders::Random.new
+random_decider1 = LeanElevators::Deciders::Random.new
+random_decider2 = LeanElevators::Deciders::Random.new
+random_decider3 = LeanElevators::Deciders::Random.new
+random_decider4 = LeanElevators::Deciders::Random.new
 fcfs_decider = LeanElevators::Deciders::FirstComeFirstServe.new
 
 LeanElevators.configure do |config|
-  config.deciders = [random_decider, fcfs_decider]
+  config.deciders = [fcfs_decider, random_decider1, random_decider2, random_decider3, random_decider4]
   config.tick_limit = 10_000
 end
 
