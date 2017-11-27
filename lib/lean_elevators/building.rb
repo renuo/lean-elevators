@@ -20,7 +20,7 @@ module LeanElevators
     end
 
     def queued_elevators
-      LoadingQueue.new(@elevators).elevators # empty elevators first
+      LoadingQueue.new(@elevators).elevators_by_space # empty elevators first
     end
 
     def to_s

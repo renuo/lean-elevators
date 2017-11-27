@@ -4,8 +4,8 @@ module LeanElevators
       @elevators = elevators
     end
 
-    def elevators
-      @elevators.sort_by { |elevator| [elevator.floor_number, elevator.people.count] }
+    def elevators_by_space
+      @elevators.sort_by { |elevator| elevator.people.count }
     end
   end
 end
