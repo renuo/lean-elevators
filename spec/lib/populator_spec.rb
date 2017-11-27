@@ -6,9 +6,7 @@ module LeanElevators
     subject { described_class.new(floors) }
 
     describe '#new' do
-      it 'initializes' do
-        expect(subject).not_to be_nil
-      end
+      it { is_expected.not_to be_nil }
     end
 
     describe '#populate' do

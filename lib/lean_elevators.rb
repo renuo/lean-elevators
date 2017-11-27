@@ -43,9 +43,9 @@ module LeanElevators
     raise 'no elevators have been configured' if elevators.empty?
 
     building = Building.new(configuration.building_size, elevators)
+    populator = Populator.new(building.floors)
 
     configuration.tick_limit.times do |tick|
-      populator = Populator.new(building.floors)
       populator.populate
       building.tick
 
