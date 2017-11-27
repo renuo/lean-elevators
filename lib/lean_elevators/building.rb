@@ -10,14 +10,17 @@ module LeanElevators
 
     # TODO: this method doesn't feel right being situated in the Building class
     def tick
-      # TODO: fairness of choosing elevators
-      @elevators.each do |elevator|
+      queued_elevators.each do |elevator|
         elevator.move!(@panels)
 
         floor = @floors[elevator.floor_number]
         floor.unload_elevator(elevator)
         floor.load_elevator(elevator)
       end
+    end
+
+    def queued_elevators
+      LoadingQueue.new(@elevators).elevators # empty elevators first
     end
 
     def to_s
