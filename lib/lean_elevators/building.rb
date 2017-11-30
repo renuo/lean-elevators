@@ -8,11 +8,20 @@ module LeanElevators
       @panels = @floors.map(&:panel)
     end
 
-    # TODO: this method doesn't feel right being situated in the Building class
     def tick
-      queued_elevators.each do |elevator|
-        elevator.move!(@panels)
+      move_elevators
+      transfer_people
+    end
 
+    def move_elevators
+      # Parallelize the deciding mechanism of an elevator
+      queued_elevators.map do |elevator|
+        Thread.new { elevator.move!(@panels) }
+      end.each(&:join)
+    end
+
+    def transfer_people
+      queued_elevators.each do |elevator|
         floor = @floors[elevator.floor_number]
         floor.unload_elevator(elevator)
         floor.load_elevator(elevator)
