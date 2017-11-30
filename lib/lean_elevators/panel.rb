@@ -20,5 +20,10 @@ module LeanElevators
     def down?
       @down
     end
+
+    def reset
+      @up = false
+      @down = false
+    end
   end
 end

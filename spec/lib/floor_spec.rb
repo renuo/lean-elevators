@@ -40,6 +40,15 @@ module LeanElevators
           subject.people = [person, person]
           subject.load_elevator(full_elevator)
         end
+
+        it 'resets the panel' do
+          subject.panel.up!
+          subject.panel.down!
+          allow(elevator).to receive(:load)
+          subject.load_elevator(elevator)
+          expect(subject.panel.up?).to be_falsey
+          expect(subject.panel.down?).to be_falsey
+        end
       end
 
       describe '#unload_elevator' do

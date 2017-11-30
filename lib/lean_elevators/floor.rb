@@ -11,9 +11,9 @@ module LeanElevators
       @people.count.positive?
     end
 
-    # TODO: extract to loader/unloader service (PackingService?)
     def load_elevator(elevator)
       elevator.load(@people.pop) while people_waiting? && !elevator.full?
+      @panel.reset unless people_waiting?
     end
 
     def unload_elevator(elevator)
