@@ -25,9 +25,7 @@ module LeanElevators
       raise InvalidFloor, "Floor #{floor_candidate} is invalid" if floor_panels[floor_candidate].nil?
 
       @floor_number = floor_candidate
-    rescue Timeout::Error => e
-      @errors << e
-    rescue InvalidFloor => e
+    rescue Deciders::Net::LevelCalculationException, Timeout::Error, InvalidFloor => e
       @errors << e
     end
 

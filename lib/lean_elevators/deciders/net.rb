@@ -14,6 +14,8 @@ module LeanElevators
       def calculate_level(decider_dto)
         response = @connection.request(build_json_post(decider_dto))
         JSON.parse(response.body).to_i
+      rescue JSON::ParserError => e
+        raise LevelCalculationException, "#{e} caused by #{e.cause}"
       end
 
       private
@@ -23,6 +25,8 @@ module LeanElevators
         request.body = decider_dto.to_hash.to_json
         request
       end
+
+      class LevelCalculationException < StandardError; end
     end
   end
 end

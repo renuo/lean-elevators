@@ -54,9 +54,21 @@ module LeanElevators
         expect(subject.floor_number).to eq(2)
       end
 
-      it 'doesnt move if floor number isnt present' do
-        allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
-        expect { subject.move!(panels) }.to change { subject.errors.count }.by(1)
+      context 'when errors happen' do
+        it 'doesnt move if floor number isnt present' do
+          allow(decider).to receive(:calculate_level).with(decider_dto).and_return(5)
+          expect { subject.move!(panels) }.to change { subject.errors.count }.by(1)
+        end
+
+        it 'catches and logs timeouts' do
+          allow(Timeout).to receive(:timeout).and_raise(Timeout::Error)
+          expect { subject.move!(panels) }.to change { subject.errors.count }.by(1)
+        end
+
+        it 'catches and logs timeouts' do
+          allow(decider).to receive(:calculate_level).with(decider_dto).and_raise(Deciders::Net::LevelCalculationException)
+          expect { subject.move!(panels) }.to change { subject.errors.count }.by(1)
+        end
       end
     end
 
