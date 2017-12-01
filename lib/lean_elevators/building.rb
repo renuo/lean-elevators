@@ -34,6 +34,8 @@ module LeanElevators
 
     def to_s
       @floors.map.with_index do |floor, level|
+        floor_label = level.to_s.rjust(3)
+
         chamber = @elevators.map do |elevator|
           if level == elevator.floor_number
             "[#{elevator.people.count}]"
@@ -44,8 +46,8 @@ module LeanElevators
 
         waiting_people = '웃' * floor.people.count
 
-        "  █ #{chamber} █ #{waiting_people}"
-      end.join("\n")
+        "#{floor_label}  █ #{chamber} █ #{waiting_people}"
+      end.reverse.join("\n")
     end
   end
 end
